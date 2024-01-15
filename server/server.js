@@ -34,10 +34,10 @@ connect().then(()=>{
     try {
         app.listen(port,()=>{console.log(`Server Connected to ${port} port`)})
     } catch (error) {
-        console.log("Cannot connect to the server")
+        console.log("Cannot connect to the server",error)
     }
     
 }).catch(error=>{
-    console.log("Invalid Database Connection")
+    console.log("Invalid Database Connection",error)
 })
 
