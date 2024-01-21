@@ -5,15 +5,32 @@ export const questionReducer = createSlice({
     initialState:{
         queue:[],
         answers:[],
-        trace:0
+        trace:0,
+        number:0,
     },
     reducers:{
         startExamAction:(state,action)=>{
             let {question,answers}=action.payload
-            return {
-                ...state,
-                queue:question,
-                answers
+            let filteredQuestions=[];
+            let filteredAnswers=[];
+            if(state.number && state.number > 0){
+                for(let i=0;i<state.number;i++){
+                    const random=Math.floor(Math.random()*question.length)
+                    filteredQuestions.push(question[random])
+                    filteredAnswers.push(answers[random])
+                    question.toSpliced(random,1)
+                }
+                return {
+                    ...state,
+                    queue:filteredQuestions,
+                    answers:filteredAnswers
+                }
+            }else{
+                return {
+                    ...state,
+                    queue:question,
+                    answers
+                }
             }
         },
         moveNextAction:(state)=>{
@@ -29,10 +46,12 @@ export const questionReducer = createSlice({
                 trace:0
             }
         },
-
+        setNumber:(state,action)=>{
+            state.number=action.payload;
+        }
     }
 })
 
-export const {startExamAction,moveNextAction,movePrevAction,resetAllAction} = questionReducer.actions;
+export const {startExamAction,moveNextAction,movePrevAction,resetAllAction,setNumber} = questionReducer.actions;
 
 export default questionReducer.reducer

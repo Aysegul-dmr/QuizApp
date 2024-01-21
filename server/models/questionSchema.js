@@ -6,7 +6,7 @@ const questionModel=new Schema({
         type:Array,
         default:[]
     },
-    answer:{
+    answers:{
         type:Array,
         default:[]
     },

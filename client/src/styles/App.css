@@ -1,14 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
 :root{
-  --primary-color: #0DFF92;
+  --success-color: #0DFF92;
+  --primary-color:#FF9671;
   --dark-color:#222222;
   --light-color: #f0f0f0;
 }
 
 body, html{
   height: 100%;
-  background: var(--dark-color)
+  padding: 0;
+  margin: 0;
+  background-image: linear-gradient(to right top, #030303, #0d0f11, #131819, #191f1d, #24261f);
 }
 
 * > *{
@@ -18,17 +21,18 @@ body, html{
 .container{
   display: block;
   position: relative;
-  margin: 40px auto;
+  margin: 10px auto;
   height: auto;
   width: 800px;
   padding: 20px;
 }
 
 .container .title{
-    font-size: 3em;
+    font-size: 2em;
+    margin-top: 0px;
     text-align: center;
     border: 5px solid var(--primary-color);
-    padding: .3em .2em;
+    padding: .1em .1em;
     border-radius: 4px;
 }
 
@@ -44,29 +48,29 @@ body, html{
 }
 
 .container .questions{
-    padding: 3em;
+    padding: 1em;
 }
 
-/* 
-.container .questions .qid{
-  padding: .2em .7em;
-  color: #222222;
-  background-color: #0DFF92;
-  border-radius: 50px;
-} */
-
 .container .grid{
-    margin-top: 3em;
+    margin-top: 2em;
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
-
+.start{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 
 .container .btn{
     padding: .2em 1.7em;
     border: none;
     border-radius: .1em;
     font-size: 1.2em;
+    width: 150px;
+    margin: 5px;
+    text-align: center;
 }
 
 .container .btn:hover{
@@ -76,12 +80,12 @@ body, html{
 }
 
 .next{
-    background-color: var(--primary-color);
+    background-color: var(--success-color);
     justify-self: flex-end;
 }
 
 .prev{
-    background-color: #faff5a;
+    background-color: #F9F871;
     justify-self: flex-start;
 }
 
@@ -106,7 +110,7 @@ ul li label{
   font-weight: 300;
   font-size: 1.35em;
   padding: 25px 25px 25px 80px;
-  margin: 10px auto;
+  margin: 0px auto;
   height: 30px;
   z-index: 9;
   cursor: pointer;
@@ -151,22 +155,40 @@ ul li .check::before {
 
 
 input[type=radio]:checked ~ .check {
-  border: 5px solid var(--primary-color)
+  border: 5px solid var(--success-color)
 }
 
 input[type=radio]:checked ~ .check::before{
-  background: var(--primary-color)
+  background: var(--success-color)
 }
 
 input[type=radio]:checked ~ .text-primary{
-  color: var(--primary-color)
+  color: var(--success-color)
 } 
 
 /* To get selected option we are using this checked class */
 .checked {
-  border: 5px solid var(--primary-color) !important;
+  border: 5px solid var(--success-color) !important;
 }
 
 .checked::before{
-  background: var(--primary-color)
+  background: var(--success-color)
+}
+.all-results{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.all-results .result-table{
+  width: 50%;
+  margin-top: 50px;
+}
+#form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#form > input{
+  margin-top: 5px;
 }

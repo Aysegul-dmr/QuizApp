@@ -1,36 +1,34 @@
 import React, { useEffect } from 'react'
 import "../styles/Result.css"
 import { Link } from 'react-router-dom'
-import ResultTable from './ResultTable'
 import { useDispatch, useSelector } from 'react-redux'
 import { resetAllAction } from '../redux/question_reducer'
 import { resetResultAction } from '../redux/result_reducer'
 import { attempts_Number, earnPoints_Number, flagResult } from '../helper/helper'
+import { usePublishResult } from '../hooks/setResult'
 
 const Result = () => {
 
     const dispatch=useDispatch();
     const {questions:{queue,answers},result:{result,userId}}=useSelector(state=>state)
-    
-    useEffect(()=>{
-        console.log(flag)
-    })
+
     const totalPoints = queue.length * 10;
-    const attemps=attempts_Number(result)
+    const attempts=attempts_Number(result)
     const earnPoints = earnPoints_Number(result, answers, 10)
     const flag = flagResult(totalPoints, earnPoints)
-
+    
+    usePublishResult({result,username:userId,attempts,points:earnPoints,achived: flag?"Passed":"Failed"})
     const onRestart=()=>{
         dispatch(resetAllAction())
         dispatch(resetResultAction())
     }
   return (
     <div className='container'>
-        <h1 className='title text-light'>Quiz Application</h1>
+        <h1 className='title text-light'>Quiz App.com</h1>
         <div className='result flex-center'>
             <div className='flex'>
                 <span>Username</span>
-                <span className='bold'>Daily Tution</span>
+                <span className='bold'>{userId}</span>
             </div>
             <div className='flex'>
                 <span>Total Quiz Points : </span>
@@ -42,7 +40,7 @@ const Result = () => {
             </div>
             <div className='flex'>
                 <span>Total Attemps : </span>
-                <span className='bold'>{attemps || 0}</span>
+                <span className='bold'>{attempts || 0}</span>
             </div>
             <div className='flex'>
                 <span>Total Earn Points : </span>
@@ -56,11 +54,10 @@ const Result = () => {
         </div>
 
         <div className="start">
-            <Link className='btn' to={'/'}  onClick={onRestart}>Restart</Link>
+            <Link className='btn' to={'/'}  onClick={onRestart}>Yeniden Başla</Link>
+            <Link className='btn' to={'/all-results'}>Tüm Sonuçları Gör</Link>
         </div>
-        <div className="container">
-            <ResultTable/>
-        </div>
+       
     </div>
   )
 }

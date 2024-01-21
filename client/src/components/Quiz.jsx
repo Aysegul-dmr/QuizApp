@@ -28,7 +28,6 @@ const Quiz = () => {
         
     }
     const onChecked=(check)=>{
-        console.log(check)
         setCheck(check)
     }
     if(result.length && result.length >= queue.length ){
@@ -37,7 +36,7 @@ const Quiz = () => {
 
   return (
     <div className='container'>
-        <h1 className='title text-light'>Quiz Application</h1>
+        <h1 className='title text-light'>QuizApp.com</h1>
         {/* display question*/}
         <Questions onChecked={onChecked}/>
         <div className='grid'>

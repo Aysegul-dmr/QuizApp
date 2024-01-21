@@ -20,14 +20,10 @@ export const CheckUserExist=({ children })=>{
     return auth ? children : <Navigate to={'/'} replace={true}></Navigate>
 }
 
-
-
 export const getServerData = async(url, callback)=>{
     const data = await (await axios.get(url))?.data;
     return callback ? callback(data) : data;
 }
-
-
 
 export const postServerData= async(url, result, callback)=>{
     const data = await (await axios.post(url, result))?.data;

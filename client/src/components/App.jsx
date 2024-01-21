@@ -4,6 +4,7 @@ import Main from './Main'
 import Quiz from './Quiz'
 import Result from './Result'
 import { CheckUserExist } from '../helper/helper'
+import AllResults from './AllResults'
 CheckUserExist
 
 const router= createBrowserRouter([
@@ -19,6 +20,10 @@ const router= createBrowserRouter([
     path:"/result",
     element:<CheckUserExist><Result/></CheckUserExist>
   },
+  {
+    path:"/all-results",
+    element:<AllResults/>
+  }
   
 ])
 
@@ -28,8 +33,6 @@ function App() {
   return (
     <>
       <RouterProvider router={router}/>
-
-     
     </>
   )
 }

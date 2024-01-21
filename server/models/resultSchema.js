@@ -9,7 +9,7 @@ const resultModel=new Schema({
         type:Array,
         default:[],
     },
-    attemps:{
+    attempts:{
         type:Number,
         default:0
     },

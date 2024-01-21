@@ -1,8 +1,9 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom';
 import "../styles/Main.css"
 import { useDispatch } from 'react-redux';
 import { setUserId } from '../redux/result_reducer';
+import { setNumber } from '../redux/question_reducer';
 
 const Main = () => {
     const dispatch=useDispatch()
@@ -12,19 +13,34 @@ const Main = () => {
             dispatch(setUserId(inputRef.current?.value))
         }
     }
+    const [questionNumber,setQuestionNumber]=useState()
+    const handleQuestionNumber = (e) =>{
+        if(e.target.value == 0){
+            setQuestionNumber()
+        }
+        if(e.target.value <= 20 && e.target.value >= 0){
+            setQuestionNumber(e.target.value)
+        }
+        
+    }
+    useEffect(()=>{
+        dispatch(setNumber(questionNumber))
+    },[questionNumber])
+
   return (
     <div className='container'>
-        <h1 className='title text-light'>Quiz Application</h1>
+        <h1 className='title text-light'>Quiz App.com</h1>
         <ol>
-            <li>You will be asked 10 questions one after another.</li>
-            <li>10 points is awarded for the correct answer.</li>
-            <li>Each question has three options. You can choose only one options.</li>
-            <li>You can review and change answers before the quiz finish.</li>
-            <li>The result will be declared at the end of the quiz.</li>
+            <li>Seçtiğiniz soru sayısı adedince soru size sorulacaktır</li>
+            <li>Doğru cevaba 10 puan verilir.</li>
+            <li>Her sorunun üç seçeneği vardır. Yalnızca bir seçeneği seçebilirsiniz.</li>
+            <li>Sınav bitmeden cevapları inceleyebilir ve değiştirebilirsiniz.</li>
+            <li>Sonuç sınav sonunda açıklanacaktır.</li>
         </ol>
 
         <form id="form">
-            <input ref={inputRef} className='userid' type="text" placeholder='Username*' />
+            <input ref={inputRef} className='userid' type="text" placeholder='Kullanıcı Adı' />
+            <input className='userid' type="text" value={questionNumber}  onChange={handleQuestionNumber} placeholder='Soru sayısını girin (En fazla 20 soru seçebilirsiniz)' />
         </form>
 
         <div className='start'>
